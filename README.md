@@ -2,6 +2,9 @@
 
 This project demonstrates how to use a Random Forest Classifier to predict stock price movements. It applies various predictors such as closing price, volume, open/high/low prices, and introduces rolling averages and trends over different time horizons to enhance model performance.
 
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+[![jupyter](https://img.shields.io/badge/Jupyter-Lab-F37626.svg?style=flat&logo=Jupyter)](https://jupyterlab.readthedocs.io/en/stable)
+
 ## Table of Contents
 Introduction
 Dataset
@@ -14,7 +17,7 @@ Contributing
 License
 
 ### Introduction
-The goal of this project is to predict whether a stock price will rise or fall on the next trading day based on historical data. The project uses a machine learning model called Random Forest Classifier to make these predictions.
+The goal of this project is to predict whether NVDA price will rise or fall on the next trading day based on historical data. The project uses a machine learning model called Random Forest Classifier to make these predictions.
 
 The main tasks included:
 
@@ -24,7 +27,9 @@ Improving the model by adding rolling averages and trends as predictors.
 Evaluating precision, i.e., how often the model correctly predicts upward stock movements.
 
 ### Dataset
-The dataset used for this project contains stock price data such as:Open
+The dataset used for this project contains stock price data such as:
+
+Open
 High
 Low
 Close
@@ -51,6 +56,7 @@ bash
 Copy code
 git clone https://github.com/your-username/stock-prediction-random-forest.git
 cd stock-prediction-random-forest
+
 Install the dependencies:
 
 bash
