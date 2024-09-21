@@ -1,6 +1,6 @@
 ## NVDA Price Prediction using Random Forest Classifier
 
-This project demonstrates how to use a Random Forest Classifier to predict stock price movements. It applies various predictors such as closing price, volume, open/high/low prices, and introduces rolling averages and trends over different time horizons to enhance model performance.
+This project uses Yahoo Finance data to analyze and predict the movement of NVIDIA (NVDA) stock prices. Starting with a basic machine learning model using a Random Forest Classifier, we then enhance the model by introducing new predictors such as rolling averages and trends to move from a beginner to intermediate level.
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 [![jupyter](https://img.shields.io/badge/Jupyter-Lab-F37626.svg?style=flat&logo=Jupyter)](https://jupyterlab.readthedocs.io/en/stable)
@@ -10,9 +10,8 @@ Introduction
 Dataset
 Requirements
 Installation
-Usage
-Model Details
-Results
+Beginner Version
+Intermediate Version 
 Contributing
 License
 
@@ -64,74 +63,16 @@ Copy code
 pip install -r requirements.txt
 Place your stock price data in the appropriate format (e.g., a CSV file with the relevant columns) into the directory.
 
-### Usage
-Train the Model:
+### Beginner Version:
+Basic Data Extraction: Using the yfinance package to pull NVDA stock data from Yahoo Finance.
+Initial Predictions: Creating a basic stock price prediction model using Random Forest Classifier based on simple stock attributes like Close, Open, High, Low, and Volume.
+Target Generation: Introducing a simple prediction logic for predicting if the next day's stock price will be higher or lower.
 
-You can train the model using the provided code by defining the training and test sets, then fitting the model.
-
-Example:
-
-python
-Copy code
-model = RandomForestClassifier(n_estimators=100, min_samples_split=100, random_state=1)
-model.fit(train[predictors], train["Target"])
-Make Predictions:
-
-After training the model, you can use it to make predictions on the test set:
-
-python
-Copy code
-predictions = model.predict(test[predictors])
-Backtesting:
-
-To evaluate the model’s performance over different test periods, use the backtesting function:
-
-python
-Copy code
-predictions = backtest(nvda, model, predictors)
-Plot Results:
-
-You can visualize the comparison between actual and predicted values by plotting:
-
-python
-Copy code
-combined.plot()
-
-### Model Details
-The model used is a Random Forest Classifier:
-
-n_estimators: The number of decision trees used in the model (default is 100).
-min_samples_split: The minimum number of samples required to split a node in the decision tree (default is 50).
-The model predicts whether the stock price will rise (1) or fall (0).
-We also introduced rolling averages and trend indicators to enhance the model’s feature set. These features are computed for different time horizons (2, 5, 60, 250, 1000 days).
-
-Example of adding rolling averages and trends:
-
-python
-Copy code
-horizons = [2, 5, 60, 250, 1000]
-
-for horizon in horizons:
-    rolling_averages = nvda.rolling(horizon).mean()
-    ratio_column = f"Close Ratio_{horizon}"
-    nvda[ratio_column] = nvda["Close"] / rolling_averages["Close"]
-    
-    trend_column = f"Trend_{horizon}"
-    nvda[trend_column] = nvda.shift(1).rolling(horizon).sum()["Target"]
-
-### Results
-After backtesting, we evaluate the model’s performance using precision—which is the ratio of correct positive predictions to the total number of positive predictions.
-
-Precision score example after model training:
-
-python
-Copy code
-precision_score(test["Target"], predictions)
-Example Precision Scores:
-Initial Precision: 0.7
-After Backtesting: 0.511
-After Adding New Predictors: 0.577
-You can adjust the model and predictors to further improve precision or other metrics like recall and accuracy.
+### Intermediate Version:
+Advanced Predictors: Added new rolling averages and trend-based predictors over different horizons (2, 5, 60, 250, 1000 days).
+Improved Model: Adjusted the RandomForestClassifier to better handle complex features and used probability predictions to adjust model thresholds dynamically.
+Backtesting: Implemented a more advanced backtesting framework to simulate the model over historical data and measure its effectiveness.
+Model Evaluation: The precision of the model was recalculated with new predictors, achieving a better understanding of upward movement predictions.
 
 ### Contributing
 Feel free to contribute to this project. Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
